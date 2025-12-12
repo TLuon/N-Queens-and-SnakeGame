@@ -11,37 +11,6 @@ ngoài.
 
 ------------------------------------------------------------------------
 
-📁 Cấu trúc thư mục
-N-Queen-and-SnakeGame/
-│
-├── NQueen/
-│ ├── Backtraking.cpp
-│ ├── Bitmask.cpp
-│ └── output/
-│
-├── SnakeGame/
-│ ├── include/
-│ │ ├── Console.h
-│ │ ├── Direction.h
-│ │ ├── Food.h
-│ │ ├── GameEngine.h
-│ │ ├── GameState.h
-│ │ ├── Position.h
-│ │ └── Snake.h
-│ │
-│ ├── src/
-│ │ ├── Console.cpp
-│ │ ├── Food.cpp
-│ │ ├── GameEngine.cpp
-│ │ ├── main.cpp
-│ │ ├── Position.cpp
-│ │ └── Snake.cpp
-│ │
-│ ├── run.bat ← chạy game nhanh trên Windows
-│ └── snake.exe ← file chạy (đã build)
-│
-└── README.md
-
 ------------------------------------------------------------------------
 
 🧠 1. NQueen

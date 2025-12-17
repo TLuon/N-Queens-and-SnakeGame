@@ -51,18 +51,15 @@ void GameEngine::reset() {
 
     state = GameState::PLAYING;
 
-    while (_kbhit()) _getch();   // xoá input buffer
+    while (_kbhit()) _getch();  
 }
 
-//──────────────────────────────
-// INPUT – bản ổn định, không bị đơ
-//──────────────────────────────
-void GameEngine::handleInput() {
+void GameEngine::handleInput() { // ổn định, không bị khựng 
 
     if (!_kbhit()) return;
 
     int c = _getch();
-    if (c == 224) c = _getch();  // arrow keys
+    if (c == 224) c = _getch(); 
 
     switch (c)
     {
@@ -95,10 +92,7 @@ void GameEngine::handleInput() {
     }
 }
 
-//──────────────────────────────
-// RANDOM OBSTACLES
-//──────────────────────────────
-void GameEngine::placeObstacles() {
+void GameEngine::placeObstacles() { // hàm random chướng ngại 
     obstacles.clear();
 
     int count = rand() % 8 + 6; // 6–13 vật cản
@@ -136,9 +130,6 @@ void GameEngine::drawObstacles() {
     Console::setColor(7);
 }
 
-//──────────────────────────────
-// DRAW GAME
-//──────────────────────────────
 void GameEngine::draw() {
     Console::clear();
 
@@ -212,9 +203,6 @@ void GameEngine::draw() {
     if (paused) cout << "  [PAUSED]";
 }
 
-//──────────────────────────────
-// UPDATE
-//──────────────────────────────
 void GameEngine::update() {
     snake.move();
     Position head = snake.getHead();
@@ -246,9 +234,6 @@ void GameEngine::update() {
     }
 }
 
-//──────────────────────────────
-// SPEED UP
-//──────────────────────────────
 void GameEngine::changeSpeed() {
     if (score > 200) speed = 40;
     else if (score > 100) speed = 55;
@@ -256,9 +241,6 @@ void GameEngine::changeSpeed() {
     else if (score > 20) speed = 90;
 }
 
-//──────────────────────────────
-// MENU
-//──────────────────────────────
 void GameEngine::drawMenu() {
     Console::clear();
     Console::setColor(14);
@@ -271,9 +253,6 @@ void GameEngine::drawMenu() {
         state = GameState::PLAYING;
 }
 
-//──────────────────────────────
-// GAME OVER
-//──────────────────────────────
 void GameEngine::drawGameOver() {
     Console::clear();
     Console::setColor(12);

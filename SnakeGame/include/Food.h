@@ -6,12 +6,12 @@
 
 class Food {
 private:
-    Position pos;
-    bool special;
+    Position pos; //  @
+    bool special; // $ 
 
 public:
     Food();
-    void generate(int width, int height, const std::deque<Position>& snake);
+    void generate(int width, int height, const std::deque<Position>& snake);  // random vị trí nhưng né con rắn ra 
     Position get() const;
     bool isSpecial() const;
 };

@@ -31,7 +31,7 @@ private:
     void update();
     void changeSpeed();
 
-    void reset();   // <-- THÊM DÒNG NÀY
+    void reset();  
 
 public:
     GameEngine();

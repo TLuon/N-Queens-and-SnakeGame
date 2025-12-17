@@ -7,8 +7,8 @@ Food::Food() {
 
 void Food::generate(int width, int height, const std::deque<Position>& snake) {
     while (true) {
-        pos.x = rand() % (width - 2) + 1;
-        pos.y = rand() % height;
+        pos.x = rand() % (width - 2) + 1; // tránh 2 bên tường 
+        pos.y = rand() % height; 
 
         bool conflict = false;
         for (auto s : snake)

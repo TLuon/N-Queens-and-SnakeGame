@@ -2,70 +2,60 @@
 #include <vector>
 using namespace std;
 
-int N;
-long long solutionCount = 0;
-vector<int> sample;
+int n;
+int solutionCount = 0;
+vector<int> pos;  // pos[r] = c: hang r dat hau tai cot c
 
-void solveBitmask(int row, int col, int diag1, int diag2, vector<int> &pos)
-{
-    if (row == N)
-    {
-        solutionCount++;
-        if (sample.empty())
-            sample = pos; // luu loi giai dau tien
+void printSolution() {
+    solutionCount++;
+    cout << "Solution " << solutionCount << ":\n";
+
+    for (int r = 0; r < n; r++) {
+        for (int c = 0; c < n; c++) {
+            if (pos[r] == c) cout << " Q ";
+            else cout << " . ";
+        }
+        cout << "\n";
+    }
+    cout << "---------------------\n";
+}
+void solveBitmask(int r, int colMask, int diag1Mask, int diag2Mask) {
+    if (r == n) {
+        printSolution();
         return;
     }
 
-    int freePos = (~(col | diag1 | diag2)) & ((1 << N) - 1);
+    // Tinh cac vi tri khi dung
+    int available = ((1 << n) - 1) & ~(colMask | diag1Mask | diag2Mask);
 
-    while (freePos)
-    {
-        int bit = freePos & -freePos;
-        freePos -= bit;
+    while (available) {
+        int bit = available & -available;   // lay 1 vi tri hop le
+        available -= bit;
 
-        int c = __builtin_ctz(bit); // doi tu bit sang cot
+        int c = __builtin_ctz(bit);  // chuyen bit sang chi so cot
 
-        pos[row] = c;
-        solveBitmask(row + 1,
-                    col | bit,
-                    (diag1 | bit) << 1,
-                    (diag2 | bit) >> 1,
-                    pos);
+        pos[r] = c;
+
+
+        solveBitmask(
+            r + 1,
+            colMask | bit,
+            (diag1Mask | bit) << 1,
+            (diag2Mask | bit) >> 1
+        );
     }
 }
 
-void printBoard(const vector<int> &pos)
-{
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++)
-            cout << (pos[i] == j ? "Q " : ". ");
-        cout << "\n";
-    }
-}
+int main() {
+    cout << "Nhap N: ";
+    cin >> n;
 
-int main()
-{
-    cout << "Nhap N (toi da 20): ";
-    cin >> N;
+    pos.resize(n);
 
-    if (N < 1 || N > 20)
-    {
-        cout << "N khong hop le.\n";
-        return 0;
-    }
+    solveBitmask(0, 0, 0, 0);
 
-    vector<int> pos(N, 0);
-
-    solveBitmask(0, 0, 0, 0, pos);
-
-    cout << "Tong so loi giai: " << solutionCount << "\n\n";
-
-    if (!sample.empty())
-    {
-        cout << "Mot loi giai mau:\n";
-        printBoard(sample);
-    }
+    cout << "Tong so loi giai: " << solutionCount << endl;
 
     return 0;
 }
+
